@@ -21,14 +21,14 @@ with open('Scaling.pkl', 'rb') as file1:
 def run():
     # Read dataset
     data = pd.read_csv('https://raw.githubusercontent.com/andik-alfauzi/Final-Project/main/sample_dataset_timeseries_noarea.csv')
-    data = data.groupby('week_start_date', as_index=False)['quantity'].sum()
+    data = data.groupby('week_end_date', as_index=False)['quantity'].sum()
     st.dataframe(data)
 
     # Change into datetime
-    data['week_start_date'] = pd.to_datetime(data['week_start_date'], format='%Y-%m-%d')
+    data['week_end_date'] = pd.to_datetime(data['week_end_date'], format='%Y-%m-%d')
 
     # Create a dataframe
-    sales = data.groupby('week_start_date')['quantity'].sum()
+    sales = data.groupby('week_end_date')['quantity'].sum()
 
     # Create A New Dataset with `window=4`
     window = 4
